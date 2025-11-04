@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, Linkedin, Twitter, Mail, Phone, MapPin, Heart, ArrowUp, ExternalLink, } from 'lucide-react';
+import { Github, Linkedin, MapPin, Heart, ArrowUp, ExternalLink, } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const scrollToTop = () => {
