@@ -61,6 +61,7 @@ const ContactSection: React.FC = () => {
           name: formData.name,
           email: formData.email,
           subject: formData.subject,
+          phone: formData.phone,
           message: formData.message,
         })
       });
