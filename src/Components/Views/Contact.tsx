@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle, Linkedin, Github, Twitter } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle, Linkedin, Github, ExternalLink } from 'lucide-react';
 
 const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     subject: '',
+    phone: '',
     message: ''
+
   });
-  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const validateForm = () => {
@@ -34,27 +37,57 @@ const ContactSection: React.FC = () => {
       newErrors.message = 'Message must be at least 10 characters';
     }
 
-    setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (validateForm()) {
-      // Simulate form submission
-      setStatus('success');
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      setIsSubmitting(true);
       
-      setTimeout(() => {
-        setStatus('idle');
-      }, 5000);
-    } else {
-      setStatus('error');
+      try {
+        // Send email via Resend API
+        const response = await fetch('/api/send-email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            subject: formData.subject,
+            message: formData.message,
+          })
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+          setSubmitStatus('success');
+          setFormData({
+            name: '',
+            email: '', 
+            subject: '',
+            phone: '',
+            message: ''
+          });
+          
+          // Auto-hide success message after 5 seconds
+          setTimeout(() => setSubmitStatus(null), 5000);
+        } else {
+          setSubmitStatus('error');
+        }
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        setSubmitStatus('error');
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
     
@@ -68,14 +101,14 @@ const ContactSection: React.FC = () => {
     {
       icon: Mail,
       label: 'Email',
-      value: 'bernardifeanyi642@gmail.com',
+      value: 'Reach me via LinkedIn',
       link: '#contact'
     },
     {
       icon: Phone,
       label: 'Phone',
-      value: '+234 123 456 7890',
-      link: 'tel:+2341234567890'
+      value: '+2348083808146',
+      link: 'tel:+2348083808146'
     },
     {
       icon: MapPin,
@@ -88,7 +121,7 @@ const ContactSection: React.FC = () => {
   const socialLinks = [
     { icon: Github, label: 'GitHub', link: 'https://github.com/B-iconx' },
     { icon: Linkedin, label: 'LinkedIn', link: 'https://www.linkedin.com/in/ifeanyi-o-52407037a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app' },
-    { icon: Twitter, label: 'Twitter', link: 'https://twitter.com' }
+    { icon: ExternalLink, text: 'Hire on Upwork', href: 'https://www.upwork.com/freelancers/~01a705b6a1bd8a779d' },
   ];
 
 
@@ -178,7 +211,7 @@ const ContactSection: React.FC = () => {
             <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-200">
               <div className="space-y-6">
                 {/* Success Message */}
-                {status === 'success' && (
+                {submitStatus === 'success' && (
                   <div className="bg-green-50 border border-green-200 rounded-xl p-4 flex items-center gap-3">
                     <CheckCircle className="text-green-600" size={24} />
                     <div>
@@ -189,7 +222,7 @@ const ContactSection: React.FC = () => {
                 )}
 
                 {/* Error Message */}
-                {status === 'error' && Object.keys(errors).length > 0 && (
+                {submitStatus === 'error' && Object.keys(errors).length > 0 && (
                   <div className="bg-red-50 border border-red-200 rounded-xl p-4 flex items-center gap-3">
                     <AlertCircle className="text-red-600" size={24} />
                     <div>
@@ -238,23 +271,43 @@ const ContactSection: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Subject Field */}
-                <div>
-                  <label htmlFor="subject" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Subject *
-                  </label>
-                  <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    className={`w-full px-4 py-3 rounded-xl border ${
-                      errors.subject ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-gray-50'
-                    } focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all`}
-                    placeholder="Project Inquiry..."
-                  />
-                  {errors.subject && <p className="text-red-600 text-sm mt-1">{errors.subject}</p>}
+                
+                <div className="grid md:grid-cols-2 gap-6">
+                  {/* Subject Field */}
+                  <div>
+                    <label htmlFor="subject" className="block text-sm font-semibold text-gray-700 mb-2">
+                      Subject *
+                    </label>
+                    <input
+                      type="text"
+                      id="subject"
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleChange}
+                      className={`w-full px-4 py-3 rounded-xl border ${
+                        errors.subject ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-gray-50'
+                      } focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all`}
+                      placeholder="Project Inquiry..."
+                    />
+                    {errors.subject && <p className="text-red-600 text-sm mt-1">{errors.subject}</p>}
+                  </div>
+                      {/* phone Field */}
+                  <div className="min-w-0">
+                    <label htmlFor="tel" className="block text-sm font-semibold text-gray-700 mb-2">
+                      phone *
+                    </label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      placeholder="enter phone number"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className={`w-full px-4 py-3 rounded-xl border ${
+                        errors.subject ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-gray-50'
+                      } focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all`}
+                    />
+                    {errors.subject && <p className="text-red-600 text-sm mt-1">{errors.subject}</p>}
+                  </div>
                 </div>
 
                 {/* Message Field */}
@@ -280,9 +333,10 @@ const ContactSection: React.FC = () => {
                 <button
                   type="button"
                   onClick={handleSubmit}
-                  className="w-full px-8 py-4 bg-gradient-to-r from-slate-700 to-gray-800 text-white rounded-xl font-semibold transition-all duration-300 hover:shadow-xl hover:scale-105 transform flex items-center justify-center gap-2 group"
+                  disabled={isSubmitting}
+                  className="w-full px-8 py-4 bg-gradient-to-r from-slate-700 to-gray-800 text-white rounded-xl font-semibold transition-all duration-300 hover:shadow-xl hover:scale-105 transform flex items-center justify-center gap-2 group disabled:opacity-50"
                 >
-                  <span>Send Message</span>
+                  <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
                   <Send size={20} className="group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>
@@ -315,5 +369,6 @@ const ContactSection: React.FC = () => {
     </section>
   );
 };
+
 
 export default ContactSection;

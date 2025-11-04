@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
+import mayor from '../../assets/mayor.png';
+import dawnAi from '../../assets/dawnAi.jpeg';
+import roman from '../../assets/roman.jpeg';
+
+
 
 interface Testimonial {
   name: string;
@@ -16,37 +21,37 @@ const TestimonialSection: React.FC = () => {
 
   const testimonials: Testimonial[] = [
     {
-      name: "Sarah Johnson",
-      role: "Marketing Director",
-      company: "TechCorp Solutions",
+      name: "Mayowa Isaac",
+      role: "CEO",
+      company: "Devnex",
       content: "Working with this developer was an absolute pleasure. They delivered our project ahead of schedule and exceeded all expectations. The attention to detail and commitment to quality was outstanding.",
       rating: 5,
-      image: "1494790108377-be9c29b29330"
+      image: mayor,
     },
     {
-      name: "Michael Chen",
-      role: "CEO",
-      company: "Digital Innovations",
-      content: "Exceptional work! The SMS gateway platform transformed how we communicate with our customers. The solution was robust, scalable, and exactly what we needed. Highly recommended!",
-      rating: 5,
-      image: "1507003211169-0a1dd7228f2d"
-    },
-    {
-      name: "Aisha Mohammed",
-      role: "Operations Manager",
-      company: "QuickPay Services",
-      content: "The VTU platform has revolutionized our business operations. It's user-friendly, reliable, and our customers love it. The developer was professional and responsive throughout the entire process.",
-      rating: 5,
-      image: "1573496359142-b8d87734a5a2"
-    },
-    {
-      name: "David Williams",
-      role: "Founder",
-      company: "Event Planners Pro",
+      name: "David Dawncrown",
+      role: "Site Engineer",
+      company: "Dawncrownpop decor",
       content: "Our new website is beautiful and functional. It perfectly captures our brand essence and has significantly increased our client inquiries. Worth every penny!",
       rating: 5,
-      image: "1560250097-0b93528c311a"
-    }
+      image: dawnAi,
+    },
+    {
+      name: "Romans chinonso",
+      role: "CEO",
+      company: "R-Tech ",
+      content: "The E-commerce platform has revolutionized our business operations. It's user-friendly, reliable, and our customers love it. The developer was professional and responsive throughout the entire process.",
+      rating: 5,
+      image: roman,
+    },
+    // {
+    //   name: "David Williams",
+    //   role: "Founder",
+    //   company: "Event Planners Pro",
+    //   content: "Our new website is beautiful and functional. It perfectly captures our brand essence and has significantly increased our client inquiries. Worth every penny!",
+    //   rating: 5,
+    //   image: "1560250097-0b93528c311a"
+    // }
   ];
 
   const nextTestimonial = () => {
@@ -67,11 +72,11 @@ const TestimonialSection: React.FC = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      nextTestimonial();
+      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [currentIndex]);
+  }, [testimonials.length]);
 
   const currentTestimonial = testimonials[currentIndex];
 
@@ -115,7 +120,7 @@ const TestimonialSection: React.FC = () => {
               <div className="text-center md:text-left">
                 <div className="relative inline-block mb-4">
                   <img
-                    src={`https://images.unsplash.com/photo-${currentTestimonial.image}?w=400&q=80`}
+                    src={currentTestimonial.image}
                     alt={currentTestimonial.name}
                     className="w-24 h-24 rounded-full object-cover mx-auto md:mx-0 border-4 border-slate-100 shadow-lg"
                   />

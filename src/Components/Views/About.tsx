@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Mail, MapPin, Briefcase, User, Download } from 'lucide-react';
+import { ChevronLeft, ChevronRight,  MapPin, Briefcase, User, Download, ExternalLink } from 'lucide-react';
+import dp1 from '../../assets/dp1.jpeg';
+import dp2 from '../../assets/dp2.png';
+import dp3 from '../../assets/dp3.png';
 
 interface CarouselSlide {
   image: string;
@@ -11,15 +14,15 @@ const AboutSection: React.FC = () => {
 
   const slides: CarouselSlide[] = [
     {
-      image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=800&q=80',
+      image: dp1,
       caption: 'Design-driven frontend developer focused on performance, precision, and experience.'
     },
     {
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80',
+      image: dp2,
       caption: 'Innovative, Interactive and Impactful; That\'s my code philosophy.'
     },
     {
-      image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&q=80',
+      image: dp3,
       caption: 'Creating web experiences that don\'t just look good, they feel good.'
     }
   ];
@@ -158,11 +161,11 @@ const AboutSection: React.FC = () => {
               <div className="bg-white rounded-lg border border-gray-200 p-5 hover:shadow-md transition-shadow duration-300">
                 <div className="flex items-center gap-3 mb-2">
                   <div className="w-8 h-8 rounded-lg bg-gray-50 border border-gray-200 flex items-center justify-center">
-                    <Mail size={16} className="text-gray-700" />
+                    <ExternalLink size={16} className="text-gray-700" />
                   </div>
-                  <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide">Email</span>
+                  <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide">Upwork</span>
                 </div>
-                <p className="text-gray-900 font-semibold text-sm ml-11">Bernardifeanyi642@gmail.com</p>
+                 <a className="text-gray-900 font-semibold text-sm ml-11 underline" href="https://www.upwork.com/freelancers/~01a705b6a1bd8a779d" target="_blank" rel="noopener noreferrer">Hire me on Upwork</a>
               </div>
 
               <div className="bg-white rounded-lg border border-gray-200 p-5 hover:shadow-md transition-shadow duration-300">

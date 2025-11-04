@@ -49,15 +49,15 @@ const Header: React.FC<{ isNavVisible?: boolean }> = ({ isNavVisible = true }) =
             onClick={() => handleNavClick('Home')}
           >
             <div className="flex items-center gap-2">
-              <div className={`w-22 h-10 rounded-lg bg-gradient-to-br ${
+              <div className={`w-20 h-10 rounded-lg bg-gradient-to-br ${
                 isNavOpen ? 'from-gray-900 to-gray-700' : 'from-gray-700 to-gray-900'
               } flex items-center justify-center transition-all duration-300 group-hover:scale-110`}>
-                <span className="text-white font-bold text-lg">B-ICONX</span>
+                <span className="text-white font-bold text-lg">B-iconx</span>
               </div>
               <span className={`text-xl font-bold tracking-tight transition-colors duration-300 ${
                 isNavOpen ? 'text-gray-900' : 'text-white'
               }`}>
-                .DEV
+                .dev
               </span>
             </div>
           </a>

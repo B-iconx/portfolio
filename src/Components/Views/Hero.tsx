@@ -74,11 +74,9 @@ const HeroSection = () => {
                     Hello, I'm
                   </span>
                   <span className="block text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
-                    Ifeanyi Caleb
+                    B-iconx
                   </span>
-                  <span className="block text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
-                    Okoye
-                  </span>
+                  <span className="block text-2xl md:text-3xl font-semibold text-gray-300 leading-tight">Ifeanyi Caleb Okoye</span>
                 </h1>
 
                 {/* Typing animation */}
@@ -152,7 +150,7 @@ const HeroSection = () => {
                           <span className="text-white font-bold text-xl">I</span>
                         </div>
                         <div>
-                          <h3 className="text-white font-semibold">Ifeanyi Caleb</h3>
+                          <h3 className="text-white font-semibold">Ifeanyi Caleb Okoye</h3>
                           <p className="text-gray-400 text-sm">Front-end Developer</p>
                         </div>
                       </div>

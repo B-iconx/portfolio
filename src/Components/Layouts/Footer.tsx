@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, Linkedin, Twitter, Instagram, Mail, Phone, MapPin, Heart, ArrowUp, } from 'lucide-react';
+import { Github, Linkedin, Twitter, Mail, Phone, MapPin, Heart, ArrowUp, ExternalLink, } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -30,13 +30,12 @@ const Footer: React.FC = () => {
   const socialLinks = [
     { icon: Github, label: 'GitHub', href: 'https://github.com/B-iconx' },
     { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/ifeanyi-o-52407037a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app' },
-    { icon: Twitter, label: 'Twitter', href: 'https://twitter.com' },
-    { icon: Instagram, label: 'Instagram', href: 'https://instagram.com' },
+     { icon: ExternalLink, label: 'Upwork', href: 'https://www.upwork.com/freelancers/~01a705b6a1bd8a779d' },
   ];
 
   const contactInfo = [
-    { icon: Mail, text: 'bernardifeanyi642@gmail.com', href: '#contact' },
-    { icon: Phone, text: '+2348083808146', href: 'tel:+2348083808146' },
+    { icon: Linkedin, text: 'Connect on LinkedIn', href:'https://www.linkedin.com/in/ifeanyi-o-52407037a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app'  },
+    { icon: ExternalLink, text: 'Hire on Upwork', href: 'https://www.upwork.com/freelancers/~01a705b6a1bd8a779d' },
     { icon: MapPin, text: 'Lagos, Nigeria', href: '#' }
   ];
 
@@ -59,7 +58,7 @@ const Footer: React.FC = () => {
                   <span className="text-gray-900 text-xl font-bold">💻</span>
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-white">B-iconx.dev</h3>
+                  <h3 className="text-2xl font-bold text-white">B-iconx</h3>
                   <p className="text-sm text-gray-400">Developer & Designer</p>
                 </div>
               </div>

@@ -3,7 +3,7 @@ import { ExternalLink, Github, Eye, Sparkles, Code2, Rocket } from 'lucide-react
 import Dawncrownpop from '../../assets/project1.png';
 import ecommerce from '../../assets/project2.png';
 import smsgateway from '../../assets/project3.png';
-import vtu from '../../assets/project3.png';
+import vtu from '../../assets/vtu site.png';
 import defaultImg from '../../assets/project1.png';
 
 
