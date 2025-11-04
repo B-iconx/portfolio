@@ -52,7 +52,7 @@ const ContactSection: React.FC = () => {
       
     try {
       // Send email via Resend API
-      const response = await fetch('/api/email-api', {
+      const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
