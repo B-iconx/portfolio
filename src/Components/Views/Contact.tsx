@@ -234,104 +234,106 @@ const ContactSection: React.FC = () => {
                   </div>
                 )}
 
-                <div className="grid md:grid-cols-2 gap-6">
-                  {/* Name Field */}
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
-                      Your Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      className={`w-full px-4 py-3 rounded-xl border ${
-                        errors.name ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-gray-50'
-                      } focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all`}
-                      placeholder="Enter your name..."
-                    />
-                    {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name}</p>}
+                <fieldset disabled={isSubmitting} className="contents">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {/* Name Field */}
+                    <div>
+                      <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
+                        Your Name *
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        className={`w-full px-4 py-3 rounded-xl border ${
+                          errors.name ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-gray-50'
+                        } focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all disabled:opacity-60 disabled:cursor-not-allowed`}
+                        placeholder="Enter your name..."
+                      />
+                      {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name}</p>}
+                    </div>
+
+                    {/* Email Field */}
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
+                        Your Email *
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        className={`w-full px-4 py-3 rounded-xl border ${
+                          errors.email ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-gray-50'
+                        } focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all disabled:opacity-60 disabled:cursor-not-allowed`}
+                        placeholder="Enter your email..."
+                      />
+                      {errors.email && <p className="text-red-600 text-sm mt-1">{errors.email}</p>}
+                    </div>
                   </div>
 
-                  {/* Email Field */}
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
-                      Your Email *
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      className={`w-full px-4 py-3 rounded-xl border ${
-                        errors.email ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-gray-50'
-                      } focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all`}
-                      placeholder="Enter your email..."
-                    />
-                    {errors.email && <p className="text-red-600 text-sm mt-1">{errors.email}</p>}
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {/* Subject Field */}
+                    <div>
+                      <label htmlFor="subject" className="block text-sm font-semibold text-gray-700 mb-2">
+                        Subject *
+                      </label>
+                      <input
+                        type="text"
+                        id="subject"
+                        name="subject"
+                        value={formData.subject}
+                        onChange={handleChange}
+                        className={`w-full px-4 py-3 rounded-xl border ${
+                          errors.subject ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-gray-50'
+                        } focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all disabled:opacity-60 disabled:cursor-not-allowed`}
+                        placeholder="Project Inquiry..."
+                      />
+                      {errors.subject && <p className="text-red-600 text-sm mt-1">{errors.subject}</p>}
+                    </div>
+                    
+                    {/* Phone Field */}
+                    <div className="min-w-0">
+                      <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
+                        Phone
+                      </label>
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        placeholder="Enter phone number"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        className={`w-full px-4 py-3 rounded-xl border ${
+                          errors.phone ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-gray-50'
+                        } focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all disabled:opacity-60 disabled:cursor-not-allowed`}
+                      />
+                      {errors.phone && <p className="text-red-600 text-sm mt-1">{errors.phone}</p>}
+                    </div>
                   </div>
-                </div>
 
-                <div className="grid md:grid-cols-2 gap-6">
-                  {/* Subject Field */}
+                  {/* Message Field */}
                   <div>
-                    <label htmlFor="subject" className="block text-sm font-semibold text-gray-700 mb-2">
-                      Subject *
+                    <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
+                      Message *
                     </label>
-                    <input
-                      type="text"
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
+                    <textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
                       onChange={handleChange}
+                      rows={6}
                       className={`w-full px-4 py-3 rounded-xl border ${
-                        errors.subject ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-gray-50'
-                      } focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all`}
-                      placeholder="Project Inquiry..."
+                        errors.message ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-gray-50'
+                      } focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all resize-none disabled:opacity-60 disabled:cursor-not-allowed`}
+                      placeholder="Tell me about your project..."
                     />
-                    {errors.subject && <p className="text-red-600 text-sm mt-1">{errors.subject}</p>}
+                    {errors.message && <p className="text-red-600 text-sm mt-1">{errors.message}</p>}
                   </div>
-                  
-                  {/* Phone Field */}
-                  <div className="min-w-0">
-                    <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
-                      Phone
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      placeholder="Enter phone number"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      className={`w-full px-4 py-3 rounded-xl border ${
-                        errors.phone ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-gray-50'
-                      } focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all`}
-                    />
-                    {errors.phone && <p className="text-red-600 text-sm mt-1">{errors.phone}</p>}
-                  </div>
-                </div>
-
-                {/* Message Field */}
-                <div>
-                  <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Message *
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    rows={6}
-                    className={`w-full px-4 py-3 rounded-xl border ${
-                      errors.message ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-gray-50'
-                    } focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all resize-none`}
-                    placeholder="Tell me about your project..."
-                  />
-                  {errors.message && <p className="text-red-600 text-sm mt-1">{errors.message}</p>}
-                </div>
+                </fieldset>
 
                 {/* Submit Button */}
                 <button
